@@ -1,0 +1,42 @@
+.profile-pic{
+    max-width: 3rem;
+}
+
+.name{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+}
+
+.message{
+    width: 400px;
+    padding: .2rem;
+    margin: .1rem;
+    animation: animate-in .7s ease-in-out 0s 1 forwards;
+    border-radius: 1rem;
+    transition: inherit;
+    transform-origin: top left;
+    color: white;
+}
+
+.msg-body{
+    padding: .5rem;
+    max-height: 100px;
+    overflow: auto;
+    word-wrap: break-word;
+}
+
+.discord-message{
+    background: #7289da;
+}
+
+@keyframes animate-in{
+    from{
+        transform: scale(0) translateX(-50%);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1) translateX(0);
+        opacity: 1;
+    }
+}

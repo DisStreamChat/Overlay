@@ -8,10 +8,15 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "dompurify": "^2.0.10",
     "firebase": "^7.14.2",
+    "markdown-react-js": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-markdown-to-html": "^1.0.11",
+    "react-render-html": "^0.6.0",
     "react-scripts": "3.4.1",
+    "react-transition-group": "^4.3.0",
     "socket.io-client": "^2.3.0"
   },
   "scripts": {

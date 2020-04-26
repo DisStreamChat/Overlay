@@ -3,6 +3,7 @@ import firebase from "./firebase"
 import './App.css';
 
 import openSocket from 'socket.io-client';
+import Message from './components/Message';
 
 //URLSearchParams
 
@@ -14,9 +15,11 @@ function App() {
   const [streamerInfo, setStreamerInfo] = useState()
   const [socket, setSocket] = useState()
   const [messages, setMessages] = useState([])
+  const [TwitchClient, setTwitchClient] = useState()
   
 
   useEffect(() => {
+    
     const urlParams = new URLSearchParams(window.location.href)
     if(urlParams.has("id")){
       setUserId(urlParams.get("id"))
@@ -67,10 +70,13 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Overlay</h1>
-      {messages.map(msg => (
-        <pre>{JSON.stringify(msg, null, 4)}</pre>
-      ))}
+      <div className="overlay-container">
+        <div className="overlay">
+          {messages.map(msg => (
+            <Message msg={msg} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
