@@ -1,23 +1,44 @@
 .profile-pic{
-    max-width: 3rem;
+    max-width: 2.5rem;
+    margin-right: .5rem;
+    margin-left: .3rem;
+    margin-top: .3rem;
+    border-radius: 50%;
+    display: inline-block !important;
 }
 
 .name{
     display: flex;
-    width: fit-content;
+    /* width: 100%; */
     align-items: center;
 }
 
+.name-header{
+    display: flex;
+    width: 98%;
+    justify-content: space-between;
+}
+
 .message{
-    width: 400px;
+    font-family: "Roboto", sans-serif;
+    width: 600px;
     padding: .2rem;
     margin: .1rem;
     animation: animate-in .7s ease-in-out 0s 1 forwards;
     border-radius: 1rem;
-    transition: inherit;
-    transform-origin: top left;
+    /* transition: inherit !important; */
+    overflow: hidden;
+    transform-origin: top right;
     color: white;
+    font-size: 1.5rem;
+    
+    max-height: fit-content;
 }
+
+.fade-out{
+    animation: animate-out .7s ease-in-out 0s 1 forwards !important;
+}
+
 
 .msg-body{
     padding: .5rem;
@@ -30,6 +51,14 @@
     background: #7289da;
 }
 
+.twitch-message{
+    background: #613fa0;
+}
+
+.emote{
+    width: 2rem;
+}
+
 @keyframes animate-in{
     from{
         transform: scale(0) translateX(-50%);
@@ -39,4 +68,39 @@
         transform: scale(1) translateX(0);
         opacity: 1;
     }
+}
+
+@keyframes animate-out{
+    from{
+        transform: scale(1) translateX(0);
+        opacity: 1;
+    }
+    to{
+        transform: scale(0) translateX(-50%);
+        opacity: 0;
+    }
+    
+}
+
+.exit-button{
+    float: right;
+}
+
+.profile{
+    display: inline;
+}
+
+.my-node-enter {
+    height: 0px;
+}
+.my-node-enter-active {
+    transition: 700ms;
+    height: 173px; 
+}
+.my-node-exit {
+    height: 173px;
+}
+.my-node-exit-active {
+    height: 0;
+    transition: 700ms;
 }

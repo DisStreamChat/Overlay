@@ -5,18 +5,14 @@ import './App.css';
 import openSocket from 'socket.io-client';
 import Message from './components/Message';
 
-//URLSearchParams
-
-
+// URLSearchParams
 function App() {
   const [userId, setUserId] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [streamerInfo, setStreamerInfo] = useState()
   const [socket, setSocket] = useState()
-  const [messages, setMessages] = useState([])
-  const [TwitchClient, setTwitchClient] = useState()
-  
+  const [messages, setMessages] = useState([])  
 
   useEffect(() => {
     
@@ -32,13 +28,15 @@ function App() {
   }, [])
 
   useEffect(() => {
+    console.log(window.location);
+    
     setSocket(openSocket('http://localhost:3200'))
 
   },[])
 
   useEffect(() => {
     if(socket){
-      socket.on("discordmessage", msg => {
+      socket.on("chatmessage", msg => {
         setMessages(m => [...m, msg])
         
       })
@@ -66,14 +64,14 @@ function App() {
       }
     }
   }, [streamerInfo, socket])
-  
+ 
 
   return (
     <div className="App">
       <div className="overlay-container">
         <div className="overlay">
           {messages.map(msg => (
-            <Message msg={msg} />
+            <Message key={msg} msg={msg} />
           ))}
         </div>
       </div>
