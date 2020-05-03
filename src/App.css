@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2|Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+:root{
+  --discord-color: #7289da;
+  --twitch-color: #613fa0;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -18,7 +23,7 @@ body{
 }
 
 .overlay-container{
-    height: 100vh;
+    height: calc(100vh - 100px);
     overflow: auto;
     width: fit-content;
 }
@@ -46,4 +51,8 @@ body{
 
 p, h1{
   margin: 0 !important;
+}
+
+a{
+  color: white;
 }
