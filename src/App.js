@@ -26,7 +26,10 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await setMessages(JSON.parse(localStorage.getItem("messages")))
+      const localMessages = JSON.parse(localStorage.getItem("messages"))
+      if(localMessages){
+        await setMessages(localMessages)
+      }
       setLoaded(true)
     })()
   }, [])
