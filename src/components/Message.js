@@ -5,12 +5,11 @@ import Avatar from "@material-ui/core/Avatar";
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 import {CSSTransition} from "react-transition-group"
 import "./Message.css"
-import Prism from 'prismjs';
 
 let renderer = new marked.Renderer();
 renderer.link = function (href, title, text) {
     let link = marked.Renderer.prototype.link.apply(this, arguments);
-    return link.replace("<a", "<a target='_blank'");
+    return link.replace("<a", "<a target='_blank' rel='noopener noreferrer'" );
 };
 
 marked.setOptions({
@@ -66,7 +65,9 @@ const Message = props => {
                           "onerror",
                           "onload",
                           "width",
-                          "height"
+                          "height",
+                          "class",
+                          "id"
                         ],
                         FORBID_TAGS: [
                           "table",

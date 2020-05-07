@@ -9,7 +9,6 @@ import Header from './components/Header';
 // URLSearchParams
 function App() {
   const [userId, setUserId] = useState("")
-  const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [streamerInfo, setStreamerInfo] = useState()
   const [socket, setSocket] = useState()
@@ -53,7 +52,7 @@ function App() {
   useEffect(() => {
     if(socket){
       socket.on("chatmessage", msg => {
-        setMessages(m => [...m, msg])
+        setMessages(m => [...m, msg].slice(0, 100))
       })
     }
   }, [socket])
