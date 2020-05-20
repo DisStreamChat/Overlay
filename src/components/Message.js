@@ -38,7 +38,10 @@ const Message = props => {
     }, [])
 
     useEffect(() => {
-        if(streamerInfo) setTimeout(deleteMe, seconds(streamerInfo?.overlayTimeout))
+        if(streamerInfo) {
+            const interval = setTimeout(deleteMe, seconds(streamerInfo?.overlayTimeout))
+            return () => clearInterval(interval)
+        }
     }, [streamerInfo, deleteMe])
 
     return (
