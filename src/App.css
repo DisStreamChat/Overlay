@@ -2,57 +2,75 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2|Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-:root{
-  --discord-color: #7289da;
-  --twitch-color: #613fa0;
+:root {
+	--discord-color: #7289da;
+	--twitch-color: #613fa0;
+	--base-color: #1e272e;
+	--accent-color: #393e46;
+	--sender-text-color: var(--text-color);
+	--text-color: var(--accent-color);
+	--sidebar-color: #2c3e50;
+	--sidebar-accent-color: #32465a;
+	--sidebar-dark-accent: #435f7a;
+	--input-padding-x: 1.5rem;
+	--input-padding-y: .75rem;
+	--sidebar-width: 250px;
+	--grey: rgb(51, 51, 51);
+	--status-border-size: 3px;
+	--error-color: red;
 }
 
-body{
-    margin: 0;
-    padding: 0;
+body {
+	margin: 0;
+	padding: 0;
 }
 
-.overlay{
-    height: fit-content;
-    width: fit-content;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    justify-content: flex-end;
-    transition: 10s;
+.overlay {
+	height: fit-content;
+	width: fit-content;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-end;
+	justify-content: flex-end;
+	transition: 10s;
 }
 
-.overlay-container{
-    height: calc(100vh - 100px);
-    overflow: auto;
-    width: fit-content;
+.overlay-container {
+	height: calc(100vh);
+	overflow: auto;
+	width: fit-content;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 0px;
+	width: 0px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f100;
+	background: #f1f1f100;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 15px;
+	background: #888;
+	border-radius: 15px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+	background: #555;
 }
 
-p, h1{
-  margin: 0 !important;
+p,
+h1 {
+	margin: 0 !important;
 }
 
-a{
-  color: white;
+a {
+	color: white;
+}
+
+.MuiAvatar-fallback {
+	transform: translate(15%, 10%);
 }
