@@ -6,6 +6,7 @@ import openSocket from "socket.io-client";
 import Message from "./components/Message";
 
 import { AppContext } from "./contexts/AppContext";
+import { useInterval } from 'react-use';
 
 // URLSearchParams
 function App() {
@@ -31,13 +32,13 @@ function App() {
 		setSocket(openSocket("http://localhost:3200"));
 	}, []);
 
-	useEffect(() => {
-		if (socket) {
-			socket.on("chatmessage", (msg) => {
-				setMessages((m) => [...m.slice(m.length - 100, m.length), msg]);
-			});
-		}
-	}, [socket]);
+    useEffect(() => {
+        if (socket) {
+            socket.on("chatmessage", msg => {
+                setMessages((m) => [...m.slice(m.length - 100, m.length), { ...msg, deleted: false }])
+            })
+        }
+    }, [socket])
 
 	useEffect(() => {
 		if (userId?.length > 0) {
@@ -63,6 +64,13 @@ function App() {
 		}
 	}, [streamerInfo, socket]);
 
+    const removeMessage = id => {
+        const copy = [...messages]
+        const index = copy.findIndex(msg => msg.uuid === id)
+        copy[index].deleted = true
+        setMessages(copy)
+    }
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -76,7 +84,7 @@ function App() {
 				<div className="overlay-container">
 					<div className="overlay">
 						{messages.map((msg) => (
-							<Message key={msg.uuid} msg={msg} />
+                            <Message delete={removeMessage} key={msg.uuid} msg={msg} />
 						))}
 					</div>
 				</div>

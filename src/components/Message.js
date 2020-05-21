@@ -33,16 +33,9 @@ const Message = props => {
         setDisplayPlatform(streamerInfo?.displayPlatform)
     }, [streamerInfo])
 
-    const deleteMe = useCallback(() => {
-        setActive(false)
-    }, [])
-
     useEffect(() => {
-        if(streamerInfo) {
-            const interval = setTimeout(deleteMe, seconds(streamerInfo?.overlayTimeout))
-            return () => clearInterval(interval)
-        }
-    }, [streamerInfo, deleteMe])
+        setActive(!props.msg.deleted)
+    }, [props])
 
     return (
         <CSSTransition unmountOnExit in={active} timeout={700} classNames="my-node">
@@ -72,8 +65,6 @@ const Message = props => {
                           "onload",
                           "width",
                           "height",
-                          "class",
-                          "id"
                         ],
                         FORBID_TAGS: [
                           "table",
