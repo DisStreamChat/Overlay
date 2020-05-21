@@ -41,7 +41,6 @@
 
 .msg-body{
     padding: .5rem;
-    max-height: 100px;
     overflow: auto;
     word-wrap: break-word;
 }
