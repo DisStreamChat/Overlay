@@ -46,11 +46,11 @@
 }
 
 .discord-message{
-    background: var(--discord-color);
+    background: var(--distwitchchat-blue);
 }
 
 .twitch-message{
-    background: var(--twitch-color);
+    background: var(--distwitchchat-purple);
 }
 
 .emote{
@@ -134,4 +134,16 @@ img.discord {
 
 .discord-false {
 	margin: 0 !important;
+}
+
+.message-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time-indicator{
+    font-size: 12px;
+    padding: 0 1rem;
+    padding-bottom: .5rem;
 }

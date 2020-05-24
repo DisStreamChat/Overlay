@@ -5,6 +5,8 @@
 :root {
 	--discord-color: #7289da;
 	--twitch-color: #613fa0;
+	--distwitchchat-blue: #2d688d;
+	--distwitchchat-purple: #462b45;
 	--base-color: #1e272e;
 	--accent-color: #393e46;
 	--sender-text-color: var(--text-color);

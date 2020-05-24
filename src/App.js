@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import firebase from "./firebase";
 import "./App.css";
 
@@ -6,7 +6,6 @@ import openSocket from "socket.io-client";
 import Message from "./components/Message";
 
 import { AppContext } from "./contexts/AppContext";
-import { useInterval } from 'react-use';
 
 // URLSearchParams
 function App() {
@@ -28,17 +27,39 @@ function App() {
 		}
 	}, []);
 
+    const removeMessage = useCallback(id => {
+        const copy = [...messages]
+        const index = copy.findIndex(msg => {
+            console.log(msg.id)
+            return msg.id === id
+        })
+        if (index === -1) return
+        copy[index].deleted = true
+        setMessages(copy)
+    }, [setMessages, messages])
+
 	useEffect(() => {
 		setSocket(openSocket("http://localhost:3200"));
 	}, []);
 
     useEffect(() => {
         if (socket) {
+            socket.removeListener('chatmessage');
             socket.on("chatmessage", msg => {
                 setMessages((m) => [...m.slice(m.length - 100, m.length), { ...msg, deleted: false }])
             })
+            return () => socket.removeListener('chatmessage');
         }
+
     }, [socket])
+
+    useEffect(() => {
+        if (socket) {
+            socket.removeListener('deletemessage');
+            socket.on("deletemessage", removeMessage)
+            return () => socket.removeListener("deletemessage")
+        }
+    }, [socket, removeMessage])
 
 	useEffect(() => {
 		if (userId?.length > 0) {
@@ -63,13 +84,6 @@ function App() {
 			}
 		}
 	}, [streamerInfo, socket]);
-
-    const removeMessage = id => {
-        const copy = [...messages]
-        const index = copy.findIndex(msg => msg.uuid === id)
-        copy[index].deleted = true
-        setMessages(copy)
-    }
 
 	return (
 		<AppContext.Provider

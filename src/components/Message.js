@@ -7,6 +7,7 @@ import {CSSTransition} from "react-transition-group"
 import "./Message.css"
 import Tooltip from '@material-ui/core/Tooltip';
 import {AppContext} from "../contexts/AppContext"
+import TimeIndicator from "./TimeIndicator"
 
 let renderer = new marked.Renderer();
 renderer.link = function (href, title, text) {
@@ -79,6 +80,10 @@ const Message = props => {
                         ],
                     }
                     ))}}>
+                </div>
+                <div className="message-footer">
+                <div className="source"></div>
+                    <TimeIndicator time={props.msg.sentAt} />
                 </div>
             </div>
         </CSSTransition>
