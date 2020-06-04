@@ -3,27 +3,24 @@ import firebase from "./firebase";
 import "./App.css";
 
 import openSocket from "socket.io-client";
-import Message from "./components/Message";
+import {Message} from "distwitchchat-componentlib";
+import "distwitchchat-componentlib/dist/index.css"
 
 import { AppContext } from "./contexts/AppContext";
 
+import "./Message.css"
 // URLSearchParams
 function App() {
 	const [userId, setUserId] = useState("");
-	const [error, setError] = useState("");
 	const [streamerInfo, setStreamerInfo] = useState();
 	const [socket, setSocket] = useState();
 	const [messages, setMessages] = useState([]);
 
+
 	useEffect(() => {
-		const urlParams = new URLSearchParams(window.location.href);
+		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.has("id")) {
 			setUserId(urlParams.get("id"));
-		} else {
-			setError({
-				code: "404",
-				message: "missing user id",
-			});
 		}
 	}, []);
 
@@ -39,7 +36,7 @@ function App() {
     }, [setMessages, messages])
 
 	useEffect(() => {
-		setSocket(openSocket("http://localhost:3200"));
+		setSocket(openSocket("https://api.distwitchchat.com"));
 	}, []);
 
     useEffect(() => {
@@ -50,7 +47,6 @@ function App() {
             })
             return () => socket.removeListener('chatmessage');
         }
-
     }, [socket])
 
     useEffect(() => {
@@ -60,6 +56,7 @@ function App() {
             return () => socket.removeListener("deletemessage")
         }
     }, [socket, removeMessage])
+
 
 	useEffect(() => {
 		if (userId?.length > 0) {
@@ -98,7 +95,7 @@ function App() {
 				<div className="overlay-container">
 					<div className="overlay">
 						{messages.map((msg) => (
-                            <Message delete={removeMessage} key={msg.uuid} msg={msg} />
+                            <Message isOverlay streamerInfo={streamerInfo.overlaySettings} delete={removeMessage} key={msg.uuid} msg={msg} />
 						))}
 					</div>
 				</div>

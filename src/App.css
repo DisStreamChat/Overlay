@@ -24,23 +24,24 @@
 
 body {
 	margin: 0;
-	padding: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .overlay {
+    padding-left: 2vw;
+    padding-right: .2rem;
 	height: fit-content;
-	width: fit-content;
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: flex-end;
-	justify-content: flex-end;
-	transition: 10s;
+	justify-content: flex-start;
 }
 
 .overlay-container {
 	height: calc(100vh);
 	overflow: auto;
-	width: fit-content;
+	width: 100vw;
 }
 
 /* width */
