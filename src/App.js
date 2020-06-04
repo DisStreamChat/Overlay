@@ -20,9 +20,14 @@ function App() {
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.has("id")) {
-			setUserId(urlParams.get("id"));
+            firebase.auth().signInAnonymously().then(() => {
+
+                setUserId(urlParams.get("id"));
+            })
 		}
-	}, []);
+    }, []);
+    
+
 
     const removeMessage = useCallback(id => {
         const copy = [...messages]
@@ -71,8 +76,8 @@ function App() {
 				return () => unsubscribe();
 			})();
 		}
-	}, [userId]);
-
+    }, [userId]);
+    
 	useEffect(() => {
 		if (streamerInfo) {
 			// send infoString to backend with sockets, to get proper socket connection

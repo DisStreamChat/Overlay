@@ -28,20 +28,25 @@ body {
     box-sizing: border-box;
 }
 
+.App{
+    height: 100vh;
+}
+
 .overlay {
     padding-left: 2vw;
     padding-right: .2rem;
-	height: fit-content;
+    height: 100vh;
+    min-height: 100px;
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: flex-end;
-	justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .overlay-container {
 	height: calc(100vh);
 	overflow: auto;
-	width: 100vw;
+    width: 100vw;
 }
 
 /* width */
