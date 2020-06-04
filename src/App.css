@@ -82,3 +82,12 @@ a {
 .MuiAvatar-fallback {
 	transform: translate(15%, 10%);
 }
+
+.emote{
+    width: 2rem !important;
+}
+
+._2WzYd{
+    width: 97vw !important;
+    min-height: fit-content;
+}

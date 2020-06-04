@@ -1,34 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
 import firebase from "./firebase";
+import "distwitchchat-componentlib/dist/index.css"
+import openSocket from "socket.io-client";
+
+import {Message} from "distwitchchat-componentlib";
+
 import "./App.css";
 
-import openSocket from "socket.io-client";
-import {Message} from "distwitchchat-componentlib";
-import "distwitchchat-componentlib/dist/index.css"
-
-import { AppContext } from "./contexts/AppContext";
-
-import "./Message.css"
-// URLSearchParams
 function App() {
 	const [userId, setUserId] = useState("");
 	const [streamerInfo, setStreamerInfo] = useState();
 	const [socket, setSocket] = useState();
 	const [messages, setMessages] = useState([]);
 
-
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.has("id")) {
             firebase.auth().signInAnonymously().then(() => {
-
                 setUserId(urlParams.get("id"));
             })
 		}
     }, []);
     
-
-
     const removeMessage = useCallback(id => {
         const copy = [...messages]
         const index = copy.findIndex(msg => {
@@ -88,24 +81,15 @@ function App() {
 	}, [streamerInfo, socket]);
 
 	return (
-		<AppContext.Provider
-			value={{
-				userId,
-				setUserId,
-				streamerInfo,
-				setStreamerInfo,
-			}}
-		>
-			<div className="App">
-				<div className="overlay-container">
-					<div className="overlay">
-						{messages.map((msg) => (
-                            <Message isOverlay streamerInfo={streamerInfo.overlaySettings} delete={removeMessage} key={msg.uuid} msg={msg} />
-						))}
-					</div>
+		<div className="App">
+			<div className="overlay-container">
+				<div className="overlay">
+					{messages.map((msg) => (
+                        <Message isOverlay streamerInfo={streamerInfo.overlaySettings} delete={removeMessage} key={msg.uuid} msg={msg} />
+					))}
 				</div>
 			</div>
-		</AppContext.Provider>
+		</div>
 	);
 }
 
