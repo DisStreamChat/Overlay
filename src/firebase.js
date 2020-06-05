@@ -2,7 +2,7 @@ import firebase from "firebase"
 
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
+    apiKey: "AIzaSyBYf5_N6811jS6vRSeakY4atZnoOJKwfq8",
     authDomain: "distwitchchat-db.firebaseapp.com",
     databaseURL: "https://distwitchchat-db.firebaseio.com",
     projectId: "distwitchchat-db",
