@@ -1,23 +1,30 @@
 import React, { useEffect, useState, useCallback } from "react";
 import firebase from "./firebase";
-import "distwitchchat-componentlib/dist/index.css"
+import "chatbits/dist/index.css"
 import openSocket from "socket.io-client";
 
-import {Message} from "distwitchchat-componentlib";
+import {Message} from "chatbits";
+import sha1 from "sha1"
 
 import "./App.css";
 
 function App() {
-	const [userId, setUserId] = useState("");
+    const [channelName, setChannelName] = useState()
+    const [channelId, setChannelId] = useState()
 	const [streamerInfo, setStreamerInfo] = useState();
 	const [socket, setSocket] = useState();
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
-		const urlParams = new URLSearchParams(window.location.search);
-		if (urlParams.has("id")) {
-            firebase.auth().signInAnonymously().then(() => {
-                setUserId(urlParams.get("id"));
+        const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.has("channel")) {
+            firebase.auth().signInAnonymously().then(async () => {
+                const name = urlParams.get("channel")
+                const ApiUrl = `https://api.disstreamchat.com/resolveuser/?user=${name}&platform=twitch`
+                const res = await fetch(ApiUrl)
+                const json = await res.json()
+                setChannelId(sha1(json.id))
+                setChannelName(name);
             })
 		}
     }, []);
@@ -57,20 +64,21 @@ function App() {
 
 
 	useEffect(() => {
-		if (userId?.length > 0) {
+		if (channelId?.length > 0) {
 			(async () => {
 				const db = firebase.firestore();
 				const unsubscribe = db
 					.collection("Streamers")
-					.doc(userId)
+					.doc(channelId)
 					.onSnapshot(snapshot => {
 						setStreamerInfo(snapshot.data());
 					});
 				return () => unsubscribe();
 			})();
 		}
-    }, [userId]);
+    }, [channelId]);
     
+
 	useEffect(() => {
 		if (streamerInfo) {
 			// send infoString to backend with sockets, to get proper socket connection
