@@ -96,6 +96,8 @@ function App() {
     }
   }, [streamerInfo, socket]);
 
+  console.log(streamerInfo)
+
   return (
     <div className="App">
       <div className="overlay-container">
@@ -104,7 +106,7 @@ function App() {
             {messages.map((msg) => (
               <Message
                 isOverlay
-                streamerInfo={streamerInfo.overlaySettings}
+                streamerInfo={streamerInfo.appSettings}
                 delete={removeMessage}
                 key={msg.uuid}
                 msg={msg}

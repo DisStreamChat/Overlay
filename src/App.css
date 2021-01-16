@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Exo+2|Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://api.disstreamchat.com/fonts');
 
 :root {
 	--discord-color: #7289da;
@@ -25,7 +23,8 @@
 body {
 	margin: 0;
     padding: 0;
-    box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: montserrat;
 }
 
 .App{
