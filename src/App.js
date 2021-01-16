@@ -106,7 +106,11 @@ function App() {
             {messages.map((msg) => (
               <Message
                 isOverlay
-                streamerInfo={streamerInfo.appSettings}
+                streamerInfo={{
+					...streamerInfo.appSettings,
+					CompactMessages: true,
+					TransparentMessageBackground: true,
+				}}
                 delete={removeMessage}
                 key={msg.uuid}
                 msg={msg}
